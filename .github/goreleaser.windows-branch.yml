@@ -8,6 +8,18 @@ builds:
     env:
       - CGO_ENABLED=0
     goos:
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+  - main: .
+    binary: td
+    ldflags:
+      - -s -w -X main.Version={{ .Version }}
+    env:
+      - CGO_ENABLED=0
+    goos:
       - windows
     goarch:
       - 386
@@ -16,9 +28,13 @@ builds:
 
 archives:
   - formats:
-      - zip
+      - tar.gz
     name_template: >-
       {{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
     files:
       - README.md
       - CHANGELOG.md
