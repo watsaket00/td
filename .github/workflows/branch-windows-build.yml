@@ -34,6 +34,6 @@ jobs:
       - name: Upload snapshot artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: goreleaser-dist-${{ github.ref_name }}
+          name: goreleaser-dist-windows-${{ github.run_number }}
           path: dist/*
           if-no-files-found: error
